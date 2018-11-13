@@ -168,6 +168,7 @@ jobs:
     - test-and-package-stg
     version: latest
   - get: github-repo-stg
+    trigger: true
   - get: docker-confs-repo-stg
   - task: setup docker artifacts
     privileged: true
@@ -210,6 +211,7 @@ jobs:
     - test-and-package-stg
     version: latest
   - get: github-repo-stg
+    trigger: true
   - get: docker-confs-repo-stg
   - task: setup docker artifacts
     privileged: true
@@ -252,6 +254,7 @@ jobs:
     - test-and-package-stg
     version: latest
   - get: github-repo-stg
+    trigger: true
   - get: docker-confs-repo-stg
   - task: setup docker artifacts
     privileged: true
@@ -294,6 +297,7 @@ jobs:
     - test-and-package-stg
     version: latest
   - get: github-repo-stg
+    trigger: true
   - get: docker-confs-repo-stg
   - task: setup docker artifacts
     privileged: true
