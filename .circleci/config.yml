@@ -19,7 +19,9 @@ jobs:
       - setup_remote_docker
       - run:
           name: build container for api
-          command: docker build konker.registry.api
+          command: |
+            cd konker.registry.api \ 
+            && docker build . 
   build/java:
     docker: 
       - image: circleci/openjdk:8-jdk-node
