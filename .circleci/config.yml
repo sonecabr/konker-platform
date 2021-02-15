@@ -12,32 +12,32 @@ jobs:
           name:  Install security
           command: mvn clean install -pl  konker.security/pom.xml -DskipTests
       - run:
-          name:  Install core
-          command: mvn clean install -pl  konker.registry.services.core/pom.xml -DskipTests
-      - run:
-          name:  Install data core
-          command: mvn clean install -pl  konker.registry.data.core/pom.xml -DskipTests
-      - run:
-          name:  Install storage cassandra
-          command: mvn clean install -pl  konker.registry.services.storage.cassandra/pom.xml -DskipTests
-      - run:
-          name:  Install storage mongodb
-          command: mvn clean install -pl  konker.registry.services.storage.mongodb/pom.xml -DskipTests
-      - run:
-          name:  Install api 
-          command: mvn clean install -pl  konker.registry.api/pom.xml -DskipTests
-      - run:
-          name:  Install data 
-          command: mvn clean install -pl  konker.registry.data/pom.xml -DskipTests
-      - run:
-          name:  Install data processor 
-          command: mvn clean install -pl  konker.registry.data.processor/pom.xml -DskipTests
-      - run:
-          name:  Install web 
-          command: mvn clean install -pl  konker.registry.web/pom.xml -DskipTests
-      - run:
-          name:  Install IDM 
-          command: mvn clean install -pl  konker.registry.idm.resourceserver/pom.xml -DskipTests
+          name:  Install services
+          command: mvn clean install -DskipTests
+      #- run:
+      #    name:  Install data core
+      #    command: mvn clean install -pl  konker.registry.data.core/pom.xml -DskipTests
+      #- run:
+      #    name:  Install storage cassandra
+      #    command: mvn clean install -pl  konker.registry.services.storage.cassandra/pom.xml -DskipTests
+      #- run:
+      #    name:  Install storage mongodb
+      #   command: mvn clean install -pl  konker.registry.services.storage.mongodb/pom.xml -DskipTests
+      #- run:
+      #    name:  Install api 
+      #    command: mvn clean install -pl  konker.registry.api/pom.xml -DskipTests
+      #- run:
+      #    name:  Install data 
+      #    command: mvn clean install -pl  konker.registry.data/pom.xml -DskipTests
+      #- run:
+      #    name:  Install data processor 
+      #   command: mvn clean install -pl  konker.registry.data.processor/pom.xml -DskipTests
+      #- run:
+      #    name:  Install web 
+      #    command: mvn clean install -pl  konker.registry.web/pom.xml -DskipTests
+      #- run:
+      #    name:  Install IDM 
+      #    command: mvn clean install -pl  konker.registry.idm.resourceserver/pom.xml -DskipTests
 
 workflows:
   maven:
