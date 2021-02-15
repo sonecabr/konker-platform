@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 orbs:
   aws-ecr: circleci/aws-ecr@6.7.0
   commands:
@@ -15,7 +15,7 @@ orbs:
           region: AWS_REGION
           repo: circleci-ecr-orb-d
 jobs:
-  build/java:
+  javaartifacts:
     docker: 
       - image: circleci/openjdk:8-jdk-node
     steps:
@@ -34,7 +34,7 @@ jobs:
           paths:
             - /home/circleci/.m2/repository/com/konkerlabs
 
-  build/docker:
+  dockerartifacts:
     docker: 
       - image: docker:17.05.0-ce-git
     steps:
@@ -87,13 +87,12 @@ jobs:
       #    command: mvn clean install -pl  konker.registry.idm.resourceserver/pom.xml -DskipTests
 
 workflows:
-  maven:
-    jobs:
-      #- build/java
-      - build/docker
-      #    requires: 
-      #      - build/java
-  version: 2
+  version: 2.1
+  #- build/java
+    - dockerartifacts:
+  #    requires: 
+  #      - build/java
+  
       
 
 
