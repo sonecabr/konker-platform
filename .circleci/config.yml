@@ -1,7 +1,7 @@
 version: 2.1
 orbs:
   aws-ecr: circleci/aws-ecr@6.7.0
-  
+ 
 jobs:
   javaartifacts:
     docker: 
@@ -21,6 +21,7 @@ jobs:
           key: konkerjars
           paths:
             - /home/circleci/.m2/repository/com/konkerlabs
+      
 
   dockerartifacts:
     docker: 
@@ -47,7 +48,7 @@ jobs:
           command: |
             cd konker.registry.api
             docker build -t $CIRCLE_SHA1
-      - aws-ecr/build_and_push_image:
+      - aws-ecr/build-and-push-image:
           account-url: AWS_ECR_ACCOUNT_URL
           aws-access-key-id: AWS_ACCESS_KEY_ID
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
@@ -55,8 +56,8 @@ jobs:
           dockerfile: Dockerfile
           path: .
           region: AWS_REGION
-          repo: circleci-ecr-orb-d
-          
+          repo: circleci-ecr-orb-demo
+          tag: "$CIRCLE_SHA1"
           
       #- run:
       #    name:  Install data core
@@ -84,9 +85,10 @@ jobs:
       #    command: mvn clean install -pl  konker.registry.idm.resourceserver/pom.xml -DskipTests
 
 workflows:
-  build_publish:
+  version: 2.1
+  build_and_publish:
     jobs:
-    - dockerartifacts
+      - dockerartifacts
   #    requires: 
   #      - build/java
   
