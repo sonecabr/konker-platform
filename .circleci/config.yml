@@ -18,7 +18,7 @@ jobs:
           command: cp /home/circleci/.m2/repository/com/konkerlabs/konker.registry.api/1.5.1.RELEASE/konker.registry.api-1.5.1.RELEASE.jar konker.registry.api/docker-resources/registry-api.jar
       - run:
           name: build container for api
-          command: docker build .
+          command: docker build konker.registry.api
   build/java:
     docker: 
       - image: circleci/openjdk:8-jdk-node
