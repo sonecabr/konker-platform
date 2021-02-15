@@ -1,9 +1,20 @@
-version: 2.1
-
-orbs:
-  maven: circleci/maven@0.0.12
-
+version: 2
+jobs:
+  maven/test:
+    docker: 
+      - image: circleci/openjdk:8-jdk-node
+    steps:
+      - checkout
+      - run:
+          name:  Install deps
+          command: mvn clean install -pl  konker.utilities/pom.xml -DskipTests
 workflows:
   maven_test:
     jobs:
-      - maven/test # checkout, build, test, and upload test results
+      - maven/test
+  version: 2
+      
+
+
+        
+        
