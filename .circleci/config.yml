@@ -1,5 +1,24 @@
 version: 2
 jobs:
+  build/java:
+    docker: 
+      - image: circleci/openjdk:8-jdk-node
+    steps:
+      - checkout
+      - run:
+          name:  Install utitilties
+          command: mvn clean install -pl  konker.utilities/pom.xml -DskipTests
+      - run:
+          name:  Install security
+          command: mvn clean install -pl  konker.security/pom.xml -DskipTests
+      - run:
+          name:  Install services
+          command: mvn clean install -DskipTests
+      - save_cache:
+          key: konkerjars
+          paths:
+            - /home/circleci/.m2/repository/com/konkerlabs
+
   build/docker:
     docker: 
       - image: docker:17.05.0-ce-git
@@ -20,26 +39,8 @@ jobs:
       - run:
           name: build container for api
           command: |
-            cd konker.registry.api \ 
-            && docker build . 
-  build/java:
-    docker: 
-      - image: circleci/openjdk:8-jdk-node
-    steps:
-      - checkout
-      - run:
-          name:  Install utitilties
-          command: mvn clean install -pl  konker.utilities/pom.xml -DskipTests
-      - run:
-          name:  Install security
-          command: mvn clean install -pl  konker.security/pom.xml -DskipTests
-      - run:
-          name:  Install services
-          command: mvn clean install -DskipTests
-      - save_cache:
-          key: konkerjars
-          paths:
-            - /home/circleci/.m2/repository/com/konkerlabs
+            cd konker.registry.api
+            docker build . 
           
           
           
