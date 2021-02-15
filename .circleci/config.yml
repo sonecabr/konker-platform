@@ -56,7 +56,9 @@ workflows:
   maven:
     jobs:
       - build/java
-      - build/docker
+      - build/docker:
+          requires: 
+            - build/java
   version: 2
       
 
