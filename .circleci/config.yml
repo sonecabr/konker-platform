@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  maven/test:
+  build/java:
     docker: 
       - image: circleci/openjdk:8-jdk-node
     steps:
@@ -40,9 +40,9 @@ jobs:
           command: mvn clean install -pl  konker.registry.idm.resourceserver/pom.xml -DskipTests
 
 workflows:
-  maven_test:
+  maven:
     jobs:
-      - maven/test
+      - build/java
   version: 2
       
 
