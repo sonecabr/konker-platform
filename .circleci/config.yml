@@ -15,7 +15,7 @@ jobs:
           name:  Install services
           command: mvn clean install -DskipTests
       - store_artifacts:
-          path: ~/.m2
+          path: ~/.m2/repository/com/konkerlabs
       #- run:
       #    name:  Install data core
       #    command: mvn clean install -pl  konker.registry.data.core/pom.xml -DskipTests
