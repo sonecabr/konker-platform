@@ -16,6 +16,7 @@ jobs:
       - run:
           name: prepare for build container for api
           command: cp /home/circleci/.m2/repository/com/konkerlabs/konker.registry.api/1.5.1.RELEASE/konker.registry.api-1.5.1.RELEASE.jar konker.registry.api/docker-resources/registry-api.jar
+      - setup_remote_docker
       - run:
           name: build container for api
           command: docker build konker.registry.api
