@@ -7,12 +7,15 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - konkerjars 
+            - konkerjars
           paths:
-            - ~/.m2/repository/com/konkerlabs
+            - /home/circleci/.m2/repository/com/konkerlabs
+      - run:
+          name: list artifacts
+          command: ls -l /home/circleci/.m2/repository/com/konkerlabs/konker.registry.api
       - run:
           name: prepare for build container for api
-          command: cp ~/.m2/repository/com/konkerlabs/konker.registry.api/1.5.1.RELEASE/konker.registry.api-1.5.1.RELEASE.jar konker.registry.api/docker-resources/registry-api.jar
+          command: cp /home/circleci/.m2/repository/com/konkerlabs/konker.registry.api/1.5.1.RELEASE/konker.registry.api-1.5.1.RELEASE.jar konker.registry.api/docker-resources/registry-api.jar
       - run:
           name: build container for api
           command: docker build .
@@ -33,7 +36,8 @@ jobs:
       - save_cache:
           key: konkerjars
           paths:
-            - ~/.m2/repository/com/konkerlabs
+            - /home/circleci/.m2/repository/com/konkerlabs
+          
           
           
       #- run:
