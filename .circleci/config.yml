@@ -6,8 +6,10 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          - name:
-            - konker_jars 
+          - keys:
+            - konkerjars 
+          - paths:
+            - ~/.m2/repository/com/konkerlabs
       - run:
           name: prepare for build container for api
           command: cp ~/.m2/repository/com/konkerlabs/konker.registry.api/1.5.1.RELEASE/konker.registry.api-1.5.1.RELEASE.jar konker.registry.api/docker-resources/registry-api.jar
@@ -28,9 +30,12 @@ jobs:
       - run:
           name:  Install services
           command: mvn clean install -DskipTests
-      - store_artifacts:
-          path: ~/.m2/repository/com/konkerlabs
-          name: konker_jars
+      - save_cache:
+          key: konkerjars
+          paths:
+            - ~/.m2/repository/com/konkerlabs
+          
+          
       #- run:
       #    name:  Install data core
       #    command: mvn clean install -pl  konker.registry.data.core/pom.xml -DskipTests
