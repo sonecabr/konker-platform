@@ -43,18 +43,13 @@ jobs:
             cp /home/circleci/.m2/repository/com/konkerlabs/konker.registry.api/1.5.1.RELEASE/konker.registry.api-1.5.1.RELEASE.jar konker.registry.api/docker-resources/dist/registry-api.jar
             ls -l konker.registry.api/docker-resources/
       - setup_remote_docker
-      - run:
-          name: build container for api
-          command: |
-            cd konker.registry.api
-            docker build -t $AWS_ECR_ACCOUNT_URL/konker-registry/api:$CIRCLE_SHA1 .
       - aws-ecr/build-and-push-image:
           account-url: AWS_ECR_ACCOUNT_URL
           aws-access-key-id: AWS_ACCESS_KEY_ID
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
           create-repo: false
           dockerfile: Dockerfile
-          path: .
+          path: konker.registry.api
           region: AWS_REGION
           repo: konker-registry/api
           tag: "$CIRCLE_SHA1"
