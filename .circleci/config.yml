@@ -47,7 +47,7 @@ jobs:
           name: build container for api
           command: |
             cd konker.registry.api
-            docker build -t $CIRCLE_SHA1
+            docker build -t $AWS_ECR_ACCOUNT_URL/konker-registry/api:$CIRCLE_SHA1 .
       - aws-ecr/build-and-push-image:
           account-url: AWS_ECR_ACCOUNT_URL
           aws-access-key-id: AWS_ACCESS_KEY_ID
@@ -56,7 +56,7 @@ jobs:
           dockerfile: Dockerfile
           path: .
           region: AWS_REGION
-          repo: circleci-ecr-orb-demo
+          repo: konker-registry/api
           tag: "$CIRCLE_SHA1"
           
       #- run:
