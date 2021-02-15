@@ -31,9 +31,9 @@ jobs:
           name:  Install services
           command: mvn clean install -DskipTests
       - save_cache:
-          key: konkerjars
-          paths:
-            - ~/.m2/repository/com/konkerlabs
+        key: konkerjars
+        paths:
+          - ~/.m2/repository/com/konkerlabs
           
           
       #- run:
