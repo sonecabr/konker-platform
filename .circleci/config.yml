@@ -6,10 +6,10 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          - keys:
-            - konkerjars 
-          - paths:
-            - ~/.m2/repository/com/konkerlabs
+        keys:
+          - konkerjars 
+        paths:
+          - ~/.m2/repository/com/konkerlabs
       - run:
           name: prepare for build container for api
           command: cp ~/.m2/repository/com/konkerlabs/konker.registry.api/1.5.1.RELEASE/konker.registry.api-1.5.1.RELEASE.jar konker.registry.api/docker-resources/registry-api.jar
