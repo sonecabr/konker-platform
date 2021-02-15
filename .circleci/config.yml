@@ -34,11 +34,11 @@ jobs:
           command: ls -l /home/circleci/.m2/repository/com/konkerlabs/konker.registry.api/1.5.1.RELEASE
       - run:
           name: prepare for build container for api
-          command: cp /home/circleci/.m2/repository/com/konkerlabs/konker.registry.api/1.5.1.RELEASE/konker.registry.api-1.5.1.RELEASE.jar konker.registry.api/docker-resources/registry-api.jar
+          command: |
+            mkdir -p konker.registry.api/docker-resources/dist 
+            cp /home/circleci/.m2/repository/com/konkerlabs/konker.registry.api/1.5.1.RELEASE/konker.registry.api-1.5.1.RELEASE.jar konker.registry.api/docker-resources/dist/registry-api.jar
+            ls -l konker.registry.api/docker-resources/
       - setup_remote_docker
-      - run:
-          name: list artifacts
-          command: ls -l konker.registry.api/docker-resources/
       - run:
           name: build container for api
           command: |
