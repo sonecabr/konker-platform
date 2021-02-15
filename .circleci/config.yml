@@ -5,6 +5,9 @@ jobs:
       - image: docker:17.05.0-ce-git
     steps:
       - checkout
+      - restore_cache:
+          - name:
+            - konker_jars 
       - run:
           name: prepare for build container for api
           command: cp ~/.m2/repository/com/konkerlabs/konker.registry.api/1.5.1.RELEASE/konker.registry.api-1.5.1.RELEASE.jar konker.registry.api/docker-resources/registry-api.jar
@@ -27,6 +30,7 @@ jobs:
           command: mvn clean install -DskipTests
       - store_artifacts:
           path: ~/.m2/repository/com/konkerlabs
+          name: konker_jars
       #- run:
       #    name:  Install data core
       #    command: mvn clean install -pl  konker.registry.data.core/pom.xml -DskipTests
