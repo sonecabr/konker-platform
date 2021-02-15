@@ -1,5 +1,16 @@
 version: 2
 jobs:
+  build/docker:
+    docker: 
+      - image: docker:17.05.0-ce-git
+    steps:
+      - checkout
+      - run:
+          name: prepare for build container for api
+          command: cp ~/.m2/repository/com/konkerlabs/konker.registry.api/1.5.1.RELEASE/konker.registry.api-1.5.1.RELEASE.jar konker.registry.api/docker-resources/registry-api.jar
+      - run:
+          name: build container for api
+          command: docker build .
   build/java:
     docker: 
       - image: circleci/openjdk:8-jdk-node
@@ -45,6 +56,7 @@ workflows:
   maven:
     jobs:
       - build/java
+      - build/docker
   version: 2
       
 
