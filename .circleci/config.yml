@@ -1,6 +1,19 @@
 version: 2
 orbs:
   aws-ecr: circleci/aws-ecr@6.7.0
+  commands:
+    build_and_push_image_to_ecr:
+     description: "Build Docker image and push to ECR"
+     steps:
+       - aws-ecr/build_and_push_image:
+          account-url: AWS_ECR_ACCOUNT_URL
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          create-repo: true
+          dockerfile: Dockerfile
+          path: .
+          region: AWS_REGION
+          repo: circleci-ecr-orb-d
 jobs:
   build/java:
     docker: 
@@ -46,18 +59,7 @@ jobs:
           command: |
             cd konker.registry.api
             docker build -t $CIRCLE_SHA1
-      - aws-ecr/build-and-push-image:
-          account-url: AWS_ECR_ACCOUNT_URL
-          aws-access-key-id: AWS_ACCESS_KEY_ID
-          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-          create-repo: true
-          dockerfile: Dockerfile
-          path: .
-          region: AWS_REGION
-          repo: circleci-ecr-orb-demo
-          tag: "$CIRCLE_SHA1"
-          
-          
+      - build_and_push_image_to_ecr
           
       #- run:
       #    name:  Install data core
